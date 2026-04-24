@@ -1,0 +1,303 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}{{ about.name }} — Portfolio{% endblock %}
+
+{% block content %}
+
+<!-- ═══════════════════════════════════════
+     HERO SECTION
+════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-lines"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="tag-dot"></span>
+      Available for work
+    </div>
+    <h1 class="hero-name">
+      {% if about %}
+        {% for word in about.name.split %}
+          <span class="word-reveal">{{ word }}</span>
+        {% endfor %}
+      {% else %}
+        <span class="word-reveal">Sushil</span>
+        <span class="word-reveal">Pandey</span>
+      {% endif %}
+    </h1>
+    <p class="hero-title">
+      <span class="title-prefix">I'm a</span>
+      <span class="typed-text" id="typedText"></span>
+      <span class="typed-cursor">|</span>
+    </p>
+    <p class="hero-bio">
+      {% if about %}{{ about.bio|truncatewords:25 }}{% else %}A passionate developer crafting beautiful digital experiences.{% endif %}
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">
+        View My Work
+        <i class="fa fa-arrow-right"></i>
+      </a>
+      <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+    </div>
+    <div class="hero-socials">
+      {% if about.github %}<a href="{{ about.github }}" target="_blank" class="social-link"><i class="fab fa-github"></i></a>{% endif %}
+      {% if about.linkedin %}<a href="{{ about.linkedin }}" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>{% endif %}
+      {% if about.resume %}<a href="{{ about.resume.url }}" target="_blank" class="social-link" title="Resume"><i class="fa fa-file-alt"></i></a>{% endif %}
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ABOUT SECTION
+════════════════════════════════════════ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">01 · About</span>
+      <h2 class="section-title">Who Am I?</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-image-wrap fade-up">
+        {% if about.profile_image %}
+          <img src="{{ about.profile_image.url }}" alt="{{ about.name }}" class="about-img"/>
+        {% else %}
+          <div class="about-img-placeholder">
+            <i class="fa fa-user"></i>
+          </div>
+        {% endif %}
+        <div class="about-img-deco"></div>
+      </div>
+      <div class="about-text fade-up">
+        <h3>{% if about %}{{ about.name }}{% else %}Your Name{% endif %}</h3>
+        <p class="about-role">{% if about %}{{ about.title }}{% else %}Full Stack Developer{% endif %}</p>
+        <p class="about-bio">{% if about %}{{ about.bio }}{% else %}Add your bio in the admin panel.{% endif %}</p>
+        <div class="about-links">
+          {% if about.github %}<a href="{{ about.github }}" target="_blank" class="pill-link"><i class="fab fa-github"></i> GitHub</a>{% endif %}
+          {% if about.linkedin %}<a href="{{ about.linkedin }}" target="_blank" class="pill-link"><i class="fab fa-linkedin-in"></i> LinkedIn</a>{% endif %}
+          {% if about.resume %}<a href="{{ about.resume.url }}" target="_blank" class="pill-link"><i class="fa fa-download"></i> Resume</a>{% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SKILLS SECTION
+════════════════════════════════════════ -->
+<section class="section section-dark" id="skills">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">02 · Skills</span>
+      <h2 class="section-title">What I Work With</h2>
+    </div>
+    {% if skill_groups %}
+      <div class="skills-wrapper">
+        {% for category, skills in skill_groups.items %}
+          {% if skills %}
+          <div class="skill-category fade-up">
+            <h3 class="skill-cat-title">{{ category }}</h3>
+            <div class="skill-list">
+              {% for skill in skills %}
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">{{ skill.name }}</span>
+                  <span class="skill-pct">{{ skill.proficiency }}%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-fill" data-width="{{ skill.proficiency }}"></div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="empty-state">Add skills from the admin panel.</p>
+    {% endif %}
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PROJECTS SECTION
+════════════════════════════════════════ -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">03 · Projects</span>
+      <h2 class="section-title">Things I've Built</h2>
+    </div>
+    {% if projects %}
+    <div class="projects-grid">
+      {% for project in projects %}
+      <div class="project-card fade-up {% if project.featured %}featured{% endif %}">
+        <div class="project-img-wrap">
+          {% if project.image %}
+            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-img"/>
+          {% else %}
+            <div class="project-img-placeholder">
+              <i class="fa fa-code"></i>
+            </div>
+          {% endif %}
+          {% if project.featured %}<span class="featured-badge">Featured</span>{% endif %}
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">{{ project.title }}</h3>
+          <p class="project-desc">{{ project.description|truncatewords:20 }}</p>
+          <div class="project-stack">
+            {% for tech in project.tech_stack.split|slice:":4" %}
+              <span class="stack-tag">{{ tech|cut:"," }}</span>
+            {% endfor %}
+          </div>
+          <div class="project-links">
+            {% if project.github_link %}
+              <a href="{{ project.github_link }}" target="_blank" class="project-link">
+                <i class="fab fa-github"></i> Code
+              </a>
+            {% endif %}
+            {% if project.live_link %}
+              <a href="{{ project.live_link }}" target="_blank" class="project-link project-link-live">
+                <i class="fa fa-external-link-alt"></i> Live
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p class="empty-state">Add projects from the admin panel.</p>
+    {% endif %}
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     EDUCATION SECTION
+════════════════════════════════════════ -->
+<section class="section section-dark" id="education">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">04 · Education</span>
+      <h2 class="section-title">My Background</h2>
+    </div>
+    {% if education %}
+    <div class="timeline">
+      {% for edu in education %}
+      <div class="timeline-item fade-up">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-year">{{ edu.year_start }} — {% if edu.year_end %}{{ edu.year_end }}{% else %}Present{% endif %}</span>
+          <h3 class="timeline-title">{{ edu.degree }}</h3>
+          <p class="timeline-place">{{ edu.institution }}</p>
+          {% if edu.description %}<p class="timeline-desc">{{ edu.description }}</p>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p class="empty-state">Add education from the admin panel.</p>
+    {% endif %}
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CONTACT SECTION
+════════════════════════════════════════ -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">05 · Contact</span>
+      <h2 class="section-title">Let's Work Together</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info fade-up">
+        <p class="contact-intro">Have a project in mind or just want to say hi? My inbox is always open.</p>
+        <div class="contact-detail">
+          <i class="fa fa-map-marker-alt"></i>
+          <span>Nepal</span>
+        </div>
+        <div class="contact-detail">
+          <i class="fa fa-clock"></i>
+          <span>Available Mon–Sat · 9am–6pm NPT</span>
+        </div>
+        <div class="contact-socials">
+          {% if about.github %}<a href="{{ about.github }}" target="_blank"><i class="fab fa-github"></i></a>{% endif %}
+          {% if about.linkedin %}<a href="{{ about.linkedin }}" target="_blank"><i class="fab fa-linkedin-in"></i></a>{% endif %}
+        </div>
+      </div>
+
+      <form class="contact-form fade-up" method="POST" action="#contact">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Your Name *</label>
+            <input type="text" id="name" name="name" placeholder="" required/>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" placeholder="" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="Project Inquiry"/>
+        </div>
+        <div class="form-group">
+          <label for="message">Message *</label>
+          <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">
+          Send Message <i class="fa fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_head %}
+<script>
+  // Typed text effect
+  const titles = [
+    '{{ about.title|default:"Full Stack Developer" }}',
+    'Python Developer',
+    'Django Enthusiast',
+    'Problem Solver'
+  ];
+  let ti = 0, ci = 0, deleting = false;
+  const el = document.getElementById('typedText');
+  function type() {
+    if (!el) return;
+    const cur = titles[ti];
+    el.textContent = deleting ? cur.substring(0, ci--) : cur.substring(0, ci++);
+    if (!deleting && ci > cur.length) { deleting = true; setTimeout(type, 1500); return; }
+    if (deleting && ci < 0) { deleting = false; ti = (ti + 1) % titles.length; }
+    setTimeout(type, deleting ? 50 : 100);
+  }
+  window.addEventListener('load', () => setTimeout(type, 800));
+
+  // Skill bars animation
+  const skillObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.skill-category').forEach(el => skillObs.observe(el));
+</script>
+{% endblock %}
