@@ -1,0 +1,140 @@
+.sushil{
+ 
+ margin-left: 90px;
+ position: fixed;
+
+}
+.pandey{
+    display: flex;
+    text-align: center;
+    font-size: 23px;
+    margin-left: 423px;
+    width: 530px;
+    justify-content: space-around;
+    white-space: nowrap;
+    
+}
+.maindiv{
+    
+    width: 100%;
+    display: flex;
+    
+}
+.btn{
+  font-size: 20px;
+  background-color: rgb(0, 0, 0);
+  color:white;
+  
+  height: 42px;
+ position: relative;
+ margin-top: 14px;
+ 
+}
+.secdiv{
+     background-color:rgb(215, 236, 236);
+     width: 1100px;
+     height: 500px;
+     margin-left: 75PX;
+     position: fixed;
+
+     
+}
+.photo{
+    width: 400px;
+    height: 500px;
+    border-radius: 15px;
+    filter: grayscale(65%);
+}
+.photodiv{
+    background-color:rgb(236, 236, 236);
+    width: 400px;
+    height: 500px;
+    
+}
+.heading{
+    font-size: 55px;
+    font-family:Open Sans sans-serif;
+    width: 500px;
+    text-align: center;
+    margin-left: 410px;
+    position: fixed;
+    top: 155px;
+    bottom: 360px;
+    
+}
+
+#profession{
+    font-size: 32px;
+    position: fixed;
+    top: 307px;
+    bottom: 270px;
+    margin-left:570px;
+    color: rgb(5, 5, 4);
+}
+#professionn{
+    font-size: 32px;
+    position: fixed;
+    top: 307px;
+    bottom: 250px;
+    margin-left:450px;
+    color: rgb(49, 49, 40);
+}
+.btntouch{
+    font-size: 17px;
+    position: fixed;
+    top: 420px;
+    bottom: 250px;
+    margin-left:450px;
+    color: rgb(214, 214, 200);
+    width: 200px;
+    height: 60px;
+    background-color: rgb(41, 36, 36);
+    font-weight: 13;
+}
+.btntouch:hover{
+    transition:all;
+    background-color: rgb(235, 235, 229);
+    color:black
+}
+.about:hover{
+    background-color: black;
+    color: white;
+    transition: 2s;
+    width: 88px;
+}
+.btn:hover{
+    width:82px;
+    transition:2s;
+    
+}
+.port:hover{
+    background-color: black;
+    color: white;
+    transition: 2s;
+    width: 99px;
+}
+
+.service:hover{
+    background-color: black;
+    color: white;
+    transition: 2s;
+    width: 99px;
+}
+
+.news:hover{
+    background-color: black;
+    color: white;
+    transition: 2s;
+    width: 99px;
+
+}
+.contact:hover{
+    background-color: black;
+    color: white;
+    transition: 2s;
+    width: 99px;
+}
+.trans{
+    background-color: rgb(199, 199, 7);
+   
+}

@@ -1,0 +1,19 @@
+.welcome{
+    text-align: center;
+    font-size: 77px;
+    color: rgb(131, 131, 131);
+    
+}
+.div{
+    background-color: rgb(186, 226, 226);
+    width: 70%;
+    height: 390px;
+    text-align: center;
+    margin-left: 213px;
+    position: fixed;
+
+}
+.imgna{
+    width: 344px;
+    margin-top: 5px;
+}
